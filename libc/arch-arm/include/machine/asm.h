@@ -89,6 +89,12 @@
 #define	ASENTRY(y)	_ENTRY(_ASM_LABEL(y)); _PROF_PROLOGUE
 #define	ASENTRY_NP(y)	_ENTRY(_ASM_LABEL(y))
 
+#ifdef __ELF__
+#define ENTRY_PRIVATE(y)  ENTRY(y); .hidden _C_LABEL(y)
+#else
+#define ENTRY_PRIVATE(y)  ENTRY(y)
+#endif
+
 #define	ASMSTR		.asciz
 
 #if defined(__ELF__) && defined(PIC)
